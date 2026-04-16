@@ -3,626 +3,370 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MenuSlide — Admin</title>
+<title>MenuSlide TV</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0d0d0d;--s1:#141414;--s2:#1c1c1c;--s3:#252525;
-  --border:#272727;--text:#f0f0f0;--muted:#6e6e6e;
-  --accent:#d4a84b;--accent2:#b8893a;--ok:#1D9E75;--err:#e24b4a;--r:10px
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Segoe UI',system-ui,sans-serif}
+:root{--accent:#d4a84b}
+
+#slide-a,#slide-b{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  transition:opacity 1.2s ease;will-change:opacity
 }
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+#slide-a{opacity:1;z-index:1}
+#slide-b{opacity:0;z-index:2}
+#slide-b.visible{opacity:1}
+#slide-a.out{opacity:0}
 
-/* SETUP OVERLAY */
-#setup{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.96);display:flex;align-items:center;justify-content:center}
-.setup-box{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:36px;width:480px;max-width:92vw}
-.setup-box h1{font-size:20px;font-weight:600;color:var(--accent);margin-bottom:4px}
-.setup-box p{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.5}
-.setup-field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-.setup-field label{font-size:12px;color:var(--muted);font-weight:500}
-.setup-field input{background:var(--s2);border:1px solid var(--border);color:var(--text);border-radius:7px;padding:10px 13px;font-size:13px;width:100%;transition:border-color .15s}
-.setup-field input:focus{outline:none;border-color:var(--accent)}
-.setup-btn{width:100%;border:none;border-radius:8px;padding:11px;font-size:14px;font-weight:500;cursor:pointer;background:var(--accent);color:#1a1000;margin-top:8px}
-.setup-btn:hover{background:var(--accent2)}
-.setup-note{margin-top:16px;font-size:11px;color:var(--muted);line-height:1.6;padding:10px;background:rgba(0,0,0,.3);border-radius:6px}
-.setup-note code{color:var(--accent);font-size:11px}
+.overlay{
+  position:absolute;inset:0;z-index:3;
+  background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.08) 52%,rgba(0,0,0,.38) 100%)
+}
 
-/* HEADER */
-.hdr{background:var(--s1);border-bottom:1px solid var(--border);padding:13px 26px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40}
-.logo{font-size:17px;font-weight:600;color:var(--accent)}
-.logo span{color:var(--text);font-weight:400}
-.live-badge{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
-.live-dot.off{background:var(--err)}
-.hdr-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#ui{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;justify-content:space-between;padding:44px 64px}
 
-/* BOTONES */
-.btn{border:none;border-radius:8px;padding:8px 15px;font-size:13px;font-weight:500;cursor:pointer;transition:opacity .15s,transform .1s;display:inline-flex;align-items:center;gap:6px}
-.btn:active{transform:scale(.97)}
-.btn-accent{background:var(--accent);color:#1a1000}
-.btn-accent:hover{background:var(--accent2)}
-.btn-ok{background:var(--ok);color:#fff}
-.btn-ok:hover{opacity:.88}
-.btn-err{background:var(--err);color:#fff}
-.btn-ghost{background:var(--s2);color:var(--text);border:1px solid var(--border)}
-.btn-ghost:hover{background:var(--s3)}
-.btn-sm{font-size:11px;padding:5px 10px;border-radius:6px}
+#top{display:flex;align-items:center;justify-content:space-between}
+#rest-name{font-size:15px;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.42);font-weight:400}
+#top-right{display:flex;align-items:center;gap:14px}
+#clock{font-size:15px;color:rgba(255,255,255,.36);font-variant-numeric:tabular-nums}
+#badge{font-size:12px;color:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 11px}
 
-/* BODY */
-.body{max-width:1020px;margin:0 auto;padding:26px 22px}
+#bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+#info{flex:1;min-width:0}
+#nombre{
+  font-size:clamp(34px,5.2vw,68px);font-weight:700;line-height:1.05;color:#fff;
+  text-shadow:0 2px 24px rgba(0,0,0,.55);margin-bottom:10px
+}
+#desc{
+  font-size:clamp(15px,1.9vw,23px);color:rgba(255,255,255,.7);
+  line-height:1.45;text-shadow:0 1px 10px rgba(0,0,0,.5);max-width:680px
+}
+#precio{
+  font-size:clamp(30px,4.2vw,58px);font-weight:700;color:var(--accent);
+  text-shadow:0 2px 18px rgba(0,0,0,.5);white-space:nowrap;flex-shrink:0
+}
 
-/* CONFIG BAR */
-.cfg-bar{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-.cfg-bar label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
-.cfg-bar input[type=text]{background:var(--s2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;font-size:13px;width:170px}
-.cfg-bar input[type=number]{background:var(--s2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;font-size:13px;width:74px}
-.cfg-bar select{background:var(--s2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;font-size:13px}
-.cfg-save-btn{align-self:flex-end}
+#dots{position:absolute;bottom:16px;left:0;right:0;z-index:4;display:flex;justify-content:center;gap:8px}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.22);transition:all .4s}
+.dot.on{background:var(--accent);width:22px;border-radius:3px}
 
-/* FORM */
-.form-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:22px}
-.form-title{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin-bottom:14px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.row1{grid-template-columns:1fr;margin-bottom:12px}
-.field{display:flex;flex-direction:column;gap:4px}
-.field label{font-size:12px;color:var(--muted)}
-.field input,.field textarea{background:var(--s2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:8px 12px;font-size:13px;font-family:inherit;transition:border-color .15s}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
-.field textarea{resize:vertical;min-height:52px}
+#bar{position:absolute;bottom:0;left:0;height:3px;z-index:5;background:var(--accent);width:0%}
 
-/* TABS FOTO */
-.ftabs{display:flex;gap:2px;margin-bottom:0}
-.ftab{padding:6px 14px;font-size:12px;font-weight:500;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid var(--border);border-bottom:none;color:var(--muted);background:var(--s2);transition:all .15s}
-.ftab.on{background:var(--s3);color:var(--text);border-color:var(--accent)}
-.fpanel{display:none;border:1px solid var(--border);border-radius:0 6px 6px 6px;padding:12px;background:var(--s2)}
-.fpanel.on{display:block}
+#paused{
+  position:absolute;inset:0;z-index:6;background:rgba(0,0,0,.32);
+  display:none;align-items:center;justify-content:center
+}
+#paused svg{opacity:.65}
 
-/* DROPZONE */
-.drop{border:2px dashed var(--border);border-radius:8px;padding:22px 16px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
-.drop:hover,.drop.over{border-color:var(--accent);background:rgba(212,168,75,.06)}
-.drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop p{font-size:13px;color:var(--muted)}
-.drop p strong{color:var(--accent)}
-.drop small{font-size:11px;color:var(--muted);margin-top:3px;display:block}
+/* Realtime badge */
+#live-dot{
+  position:absolute;top:22px;right:22px;z-index:5;
+  width:8px;height:8px;border-radius:50%;background:#1D9E75;
+  box-shadow:0 0 0 0 rgba(29,158,117,.5);animation:pulse 2.5s infinite
+}
+#live-dot.off{background:#e24b4a;animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(29,158,117,.5)}70%{box-shadow:0 0 0 8px rgba(29,158,117,0)}100%{box-shadow:0 0 0 0 rgba(29,158,117,0)}}
 
-/* UPLOAD PROGRESS */
-.up-prog{margin-top:8px;display:none}
-.up-prog-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:6px}
-.up-prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s;width:0%}
-.up-prog p{font-size:12px;color:var(--muted)}
+/* Update flash */
+#update-flash{
+  position:absolute;top:36px;right:36px;z-index:6;
+  background:rgba(29,158,117,.9);border-radius:6px;
+  padding:6px 14px;font-size:12px;color:#fff;font-weight:500;
+  opacity:0;transition:opacity .3s;pointer-events:none
+}
+#update-flash.show{opacity:1}
 
-/* COMPRESS */
-.cmp{margin-top:8px;display:none;align-items:center;gap:8px;background:rgba(0,0,0,.2);border-radius:6px;padding:7px 10px}
-.cmp label{font-size:11px;color:var(--muted);white-space:nowrap}
-.cmp input[type=range]{flex:1;accent-color:var(--accent)}
-.cmp span{font-size:11px;color:var(--accent);min-width:34px;font-weight:500}
+/* Loader / error */
+#loader{
+  position:absolute;inset:0;z-index:20;background:#000;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px
+}
+.spin{width:38px;height:38px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+#loader p{font-size:13px;color:rgba(255,255,255,.3)}
 
-/* FOTO PREVIEW */
-.fprev{margin-top:8px;border-radius:7px;overflow:hidden;display:none;background:var(--s1)}
-.fprev img{width:100%;max-height:140px;object-fit:cover;display:block}
-.fprev-info{padding:6px 10px;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--muted);flex-wrap:wrap;gap:4px}
-.fprev-info .sz{color:var(--accent);font-weight:500}
-.rmfoto{background:none;border:none;color:var(--err);cursor:pointer;font-size:12px;padding:2px 6px}
+#cfg-overlay{
+  position:absolute;inset:0;z-index:30;background:rgba(0,0,0,.92);
+  display:none;align-items:center;justify-content:center
+}
+#cfg-box{
+  background:#141414;border:1px solid #2a2a2a;border-radius:12px;
+  padding:32px;width:420px;max-width:90vw
+}
+#cfg-box h2{font-size:16px;font-weight:500;margin-bottom:20px;color:#efefef}
+.cfg-field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.cfg-field label{font-size:12px;color:#777}
+.cfg-field input{background:#1c1c1c;border:1px solid #2a2a2a;color:#efefef;border-radius:6px;padding:9px 12px;font-size:13px;width:100%}
+.cfg-field input:focus{outline:none;border-color:var(--accent)}
+.cfg-btn{width:100%;border:none;border-radius:8px;padding:11px;font-size:14px;font-weight:500;cursor:pointer;background:var(--accent);color:#1a1000;margin-top:6px}
+.cfg-btn:hover{background:#b8893a}
+.cfg-note{font-size:11px;color:#555;text-align:center;margin-top:12px;line-height:1.5}
 
-/* URL PREVIEW */
-.uprev{margin-top:7px;border-radius:6px;overflow:hidden;display:none}
-.uprev img{width:100%;height:110px;object-fit:cover;display:block}
-
-/* FORM ACTIONS */
-.form-acts{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:center}
-
-/* SECTION HEADER */
-.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.sh h2{font-size:14px;font-weight:500}
-.sh span{font-size:12px;color:var(--muted)}
-
-/* GRID PLATOS */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:12px}
-.card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;position:relative;transition:border-color .15s}
-.card:hover{border-color:var(--accent)}
-.card img{width:100%;height:122px;object-fit:cover;display:block;background:var(--s2)}
-.card .nopic{width:100%;height:122px;background:var(--s2);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px}
-.card .ci{padding:9px 11px}
-.card .nm{font-size:13px;font-weight:500;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card .pr{font-size:12px;color:var(--accent);font-weight:500}
-.card .ds{font-size:11px;color:var(--muted);margin-top:2px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.card .acts{padding:7px 10px;border-top:1px solid var(--border);display:flex;gap:6px;flex-wrap:wrap}
-.ibadge{position:absolute;top:6px;left:6px;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(0,0,0,.72);color:#777}
-.ibadge.cloud{color:#60a5fa}
-.ibadge.loc{color:var(--accent)}
-.offbadge{position:absolute;top:6px;right:6px;background:rgba(226,75,74,.85);border-radius:4px;padding:2px 7px;font-size:10px;color:#fff}
-.ord-btns{position:absolute;top:34px;right:6px;display:flex;flex-direction:column;gap:3px}
-.ob{background:rgba(0,0,0,.65);border:none;color:#ccc;border-radius:3px;padding:2px 6px;font-size:11px;cursor:pointer}
-.ob:hover{background:rgba(212,168,75,.4);color:#fff}
-
-/* EMPTY */
-.empty{text-align:center;padding:50px 20px;color:var(--muted);grid-column:1/-1}
-
-/* TOAST */
-#toast{position:fixed;bottom:22px;right:22px;z-index:9999;background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;color:var(--text);opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;max-width:300px}
-#toast.show{opacity:1;transform:translateY(0)}
-#toast.ok{border-color:var(--ok);color:var(--ok)}
-#toast.er{border-color:var(--err);color:var(--err)}
+@media(max-width:768px){
+  #ui{padding:24px 28px}
+  #nombre{font-size:32px}
+  #desc{font-size:15px}
+  #precio{font-size:28px}
+}
 </style>
 </head>
 <body>
 
-<!-- SETUP OVERLAY -->
-<div id="setup">
-  <div class="setup-box">
-    <h1>MenuSlide Admin</h1>
-    <p>Introduce tus credenciales de Supabase para empezar. Solo se hace una vez.</p>
-    <div class="setup-field">
-      <label>Project URL</label>
-      <input type="text" id="su-url" placeholder="https://xxxxxxxxxxxx.supabase.co">
+<div id="loader"><div class="spin"></div><p id="loader-txt">Conectando con Supabase...</p></div>
+
+<div id="cfg-overlay">
+  <div id="cfg-box">
+    <h2>Configuración TV</h2>
+    <div class="cfg-field">
+      <label>Supabase URL</label>
+      <input type="text" id="inp-url" placeholder="https://xxxx.supabase.co">
     </div>
-    <div class="setup-field">
-      <label>anon / public key</label>
-      <input type="text" id="su-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+    <div class="cfg-field">
+      <label>Supabase anon key</label>
+      <input type="text" id="inp-key" placeholder="eyJhbGc...">
     </div>
-    <div class="setup-field">
-      <label>Service role key <span style="color:var(--muted)">(para Storage)</span></label>
-      <input type="text" id="su-svc" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
-    </div>
-    <button class="setup-btn" onclick="saveSetup()">Conectar y empezar</button>
-    <div class="setup-note">
-      Encuéntrate las keys en tu proyecto Supabase → <code>Settings → API</code>.<br>
-      La service role key solo se usa en este panel de admin (nunca en la TV).
-    </div>
+    <button class="cfg-btn" onclick="saveCredentials()">Conectar</button>
+    <p class="cfg-note">Estas credenciales son públicas (anon key).<br>Se guardan en este navegador.</p>
   </div>
 </div>
 
-<!-- HEADER -->
-<div class="hdr">
-  <div style="display:flex;align-items:center;gap:16px">
-    <div class="logo">Menu<span>Slide</span></div>
-    <div class="live-badge">
-      <div class="live-dot off" id="live-dot"></div>
-      <span id="live-txt">Conectando...</span>
+<div id="slide-a"></div>
+<div id="slide-b"></div>
+<div class="overlay"></div>
+
+<div id="ui">
+  <div id="top">
+    <div id="rest-name"></div>
+    <div id="top-right">
+      <div id="clock"></div>
+      <div id="badge"></div>
     </div>
   </div>
-  <div class="hdr-right">
-    <button class="btn btn-ghost" onclick="resetSetup()" style="font-size:11px">⚙ Cambiar proyecto</button>
-    <button class="btn btn-ghost" onclick="window.open('tv.html','_blank')">📺 Abrir TV</button>
+  <div id="bottom">
+    <div id="info">
+      <div id="nombre"></div>
+      <div id="desc"></div>
+    </div>
+    <div id="precio"></div>
   </div>
 </div>
 
-<div class="body">
-
-  <!-- CONFIG -->
-  <div class="cfg-bar">
-    <label>Nombre restaurante<input type="text" id="cfg-rest" value="" oninput=""></label>
-    <label>Segundos por foto<input type="number" id="cfg-seg" value="6" min="2" max="60"></label>
-    <label>Moneda<input type="text" id="cfg-mon" value="€" style="width:54px"></label>
-    <button class="btn btn-ok btn-sm cfg-save-btn" onclick="saveConfig()">Guardar config</button>
-  </div>
-
-  <!-- FORM -->
-  <div class="form-card">
-    <div class="form-title" id="form-title">Añadir plato</div>
-    <input type="hidden" id="edit-id">
-    <input type="hidden" id="edit-url">
-
-    <div class="row2">
-      <div class="field"><label>Nombre *</label><input type="text" id="f-nom" placeholder="Ej: Tacos de Barbacoa"></div>
-      <div class="field"><label>Precio</label><input type="text" id="f-precio" placeholder="Ej: 12.50"></div>
-    </div>
-    <div class="row2 row1">
-      <div class="field"><label>Descripción</label><textarea id="f-desc" placeholder="Descripción breve..."></textarea></div>
-    </div>
-
-    <div class="field" style="margin-top:4px">
-      <label>Fotografía *</label>
-      <div class="ftabs">
-        <div class="ftab on" id="ftab-up" onclick="switchTab('up')">⬆ Subir a Supabase Storage</div>
-        <div class="ftab" id="ftab-url" onclick="switchTab('url')">🔗 URL externa</div>
-      </div>
-
-      <div class="fpanel on" id="fp-up">
-        <div class="drop" id="drop" ondragover="onDragOver(event)" ondragleave="onDragLeave()" ondrop="onDrop(event)">
-          <input type="file" accept="image/*" id="file-inp" onchange="onFileChange(event)">
-          <p><strong>Haz clic o arrastra</strong> la foto aquí</p>
-          <small>JPG, PNG, WEBP — se comprime y sube a Supabase Storage</small>
-        </div>
-        <div class="cmp" id="cmp">
-          <label>Calidad:</label>
-          <input type="range" min="20" max="100" value="80" step="1" id="cmp-range" oninput="recompress()">
-          <span id="cmp-val">80%</span>
-        </div>
-        <div class="fprev" id="fprev">
-          <img id="fprev-img" src="" alt="">
-          <div class="fprev-info">
-            <span id="fprev-name">—</span>
-            <span class="sz" id="fprev-sz">—</span>
-            <button class="rmfoto" onclick="removeFoto()">✕ Quitar</button>
-          </div>
-        </div>
-        <div class="up-prog" id="up-prog">
-          <p id="up-prog-txt">Subiendo...</p>
-          <div class="up-prog-bar"><div class="up-prog-fill" id="up-fill"></div></div>
-        </div>
-      </div>
-
-      <div class="fpanel" id="fp-url">
-        <div class="field">
-          <input type="text" id="f-url" placeholder="https://ejemplo.com/foto.jpg" oninput="previewUrl()" style="width:100%">
-          <div class="uprev" id="uprev"><img id="uprev-img" src="" alt=""></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-acts">
-      <button class="btn btn-accent" onclick="savePlato()" id="save-btn">Guardar plato</button>
-      <button class="btn btn-ghost" onclick="clearForm()">Limpiar</button>
-      <span id="saving-txt" style="font-size:12px;color:var(--muted);display:none">Guardando...</span>
-    </div>
-  </div>
-
-  <!-- GRID -->
-  <div class="sh">
-    <h2>Platos del menú</h2>
-    <span id="count">0 platos</span>
-  </div>
-  <div class="grid" id="grid"></div>
-
+<div id="dots"></div>
+<div id="bar"></div>
+<div id="live-dot" class="off" title="Realtime"></div>
+<div id="update-flash">✓ Menú actualizado</div>
+<div id="paused">
+  <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+    <rect x="14" y="12" width="13" height="40" rx="4" fill="white"/>
+    <rect x="37" y="12" width="13" height="40" rx="4" fill="white"/>
+  </svg>
 </div>
-
-<div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-/* ── CREDENCIALES ── */
-var SUPA_URL = localStorage.getItem('adm_supa_url') || '';
-var SUPA_KEY = localStorage.getItem('adm_supa_key') || ''; // anon
-var SUPA_SVC = localStorage.getItem('adm_supa_svc') || ''; // service role
-var supabase_client, supabase_upload;
-var platos = [], configData = {};
-var activeTab = 'up';
-var pendingBlob = null, pendingOrigFile = null, pendingFileName = null;
+/* ── CONFIG ── */
+var SUPA_URL = localStorage.getItem('tv_supa_url') || '';
+var SUPA_KEY = localStorage.getItem('tv_supa_key') || '';
+var supabase, channel;
+var platos = [], config = {}, idx = 0;
+var timer = null, progInt = null, paused = false;
+var slot = 'a';
 
-function saveSetup(){
-  SUPA_URL = document.getElementById('su-url').value.trim();
-  SUPA_KEY = document.getElementById('su-key').value.trim();
-  SUPA_SVC = document.getElementById('su-svc').value.trim();
-  if(!SUPA_URL||!SUPA_KEY){ alert('URL y anon key son obligatorios.'); return; }
-  localStorage.setItem('adm_supa_url', SUPA_URL);
-  localStorage.setItem('adm_supa_key', SUPA_KEY);
-  if(SUPA_SVC) localStorage.setItem('adm_supa_svc', SUPA_SVC);
-  document.getElementById('setup').style.display = 'none';
-  initSupabase();
-}
-
-function resetSetup(){
-  ['adm_supa_url','adm_supa_key','adm_supa_svc'].forEach(function(k){ localStorage.removeItem(k); });
-  location.reload();
+function saveCredentials(){
+  SUPA_URL = document.getElementById('inp-url').value.trim();
+  SUPA_KEY = document.getElementById('inp-key').value.trim();
+  if(!SUPA_URL || !SUPA_KEY){ alert('Rellena los dos campos.'); return; }
+  localStorage.setItem('tv_supa_url', SUPA_URL);
+  localStorage.setItem('tv_supa_key', SUPA_KEY);
+  document.getElementById('cfg-overlay').style.display = 'none';
+  init();
 }
 
 /* ── INIT ── */
-function initSupabase(){
-  if(!SUPA_URL||!SUPA_KEY){ document.getElementById('setup').style.display='flex'; return; }
-  document.getElementById('setup').style.display = 'none';
-  supabase_client = window.supabase.createClient(SUPA_URL, SUPA_KEY);
-  // Para uploads usamos service key si existe, si no anon
-  supabase_upload = SUPA_SVC
-    ? window.supabase.createClient(SUPA_URL, SUPA_SVC)
-    : supabase_client;
-  subscribeRealtime();
+function init(){
+  if(!SUPA_URL || !SUPA_KEY){
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('cfg-overlay').style.display = 'flex';
+    return;
+  }
+  document.getElementById('loader').style.display = 'flex';
+  document.getElementById('loader-txt').textContent = 'Conectando...';
+
+  try{
+    supabase = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+  }catch(e){
+    showLoader('Error al crear cliente Supabase. Comprueba la URL y la key.'); return;
+  }
+
   loadAll();
+  subscribeRealtime();
+  setInterval(updateClock, 15000);
+  updateClock();
+}
+
+/* ── CARGA INICIAL ── */
+async function loadAll(){
+  try{
+    var [cfgRes, platosRes] = await Promise.all([
+      supabase.from('config').select('*').single(),
+      supabase.from('platos').select('*').eq('activo', true).order('orden', {ascending:true})
+    ]);
+    if(cfgRes.error && cfgRes.error.code !== 'PGRST116') throw cfgRes.error;
+    if(platosRes.error) throw platosRes.error;
+    config = cfgRes.data || {restaurant:'Mi Restaurante', moneda:'€', tiempo:6};
+    platos = platosRes.data || [];
+    document.getElementById('loader').style.display = 'none';
+    if(!platos.length){ showLoader('No hay platos activos en el menú.'); return; }
+    document.getElementById('rest-name').textContent = (config.restaurant||'').toUpperCase();
+    buildDots();
+    showSlide(0, true);
+  }catch(e){
+    showLoader('Error de conexión: ' + e.message + '\n\nPulsa C para reconfigurar.');
+  }
 }
 
 /* ── REALTIME ── */
 function subscribeRealtime(){
-  var ch = supabase_client.channel('admin-watch')
-    .on('postgres_changes',{event:'*',schema:'public',table:'platos'}, function(){ loadPlatos(); })
-    .subscribe(function(s){
+  if(channel) supabase.removeChannel(channel);
+  channel = supabase
+    .channel('menu-changes')
+    .on('postgres_changes', {event:'*', schema:'public', table:'platos'}, handleChange)
+    .on('postgres_changes', {event:'*', schema:'public', table:'config'}, handleConfigChange)
+    .subscribe(function(status){
       var dot = document.getElementById('live-dot');
-      var txt = document.getElementById('live-txt');
-      if(s==='SUBSCRIBED'){ dot.classList.remove('off'); txt.textContent='Conectado en tiempo real'; }
-      else { dot.classList.add('off'); txt.textContent='Sin conexión realtime'; }
+      if(status === 'SUBSCRIBED'){ dot.classList.remove('off'); }
+      else { dot.classList.add('off'); }
     });
 }
 
-/* ── CARGA ── */
-async function loadAll(){
-  await Promise.all([loadConfig(), loadPlatos()]);
+async function handleChange(){
+  var res = await supabase.from('platos').select('*').eq('activo',true).order('orden',{ascending:true});
+  if(res.error) return;
+  platos = res.data || [];
+  if(idx >= platos.length) idx = 0;
+  buildDots();
+  if(platos.length) showSlide(idx, true);
+  flashUpdate();
 }
 
-async function loadConfig(){
-  var r = await supabase_client.from('config').select('*').single();
-  if(r.data){
-    configData = r.data;
-    document.getElementById('cfg-rest').value = r.data.restaurant || '';
-    document.getElementById('cfg-seg').value = r.data.tiempo || 6;
-    document.getElementById('cfg-mon').value = r.data.moneda || '€';
-  }
+async function handleConfigChange(){
+  var res = await supabase.from('config').select('*').single();
+  if(res.error) return;
+  config = res.data;
+  document.getElementById('rest-name').textContent = (config.restaurant||'').toUpperCase();
+  flashUpdate();
 }
 
-async function loadPlatos(){
-  var r = await supabase_client.from('platos').select('*').order('orden',{ascending:true});
-  if(r.error){ toast('Error al cargar platos: '+r.error.message,'er'); return; }
-  platos = r.data || [];
-  renderGrid();
+function flashUpdate(){
+  var el = document.getElementById('update-flash');
+  el.classList.add('show');
+  setTimeout(function(){ el.classList.remove('show'); }, 2500);
 }
 
-/* ── GUARDAR CONFIG ── */
-async function saveConfig(){
-  var data = {
-    restaurant: document.getElementById('cfg-rest').value.trim(),
-    tiempo: parseInt(document.getElementById('cfg-seg').value)||6,
-    moneda: document.getElementById('cfg-mon').value.trim()||'€'
-  };
-  var r;
-  if(configData.id){
-    r = await supabase_client.from('config').update(data).eq('id',configData.id);
-  } else {
-    r = await supabase_client.from('config').insert([data]);
-  }
-  if(r.error){ toast('Error: '+r.error.message,'er'); return; }
-  toast('Configuración guardada — la TV se actualiza al instante','ok');
-  loadConfig();
-}
-
-/* ── TABS FOTO ── */
-function switchTab(t){
-  activeTab = t;
-  document.getElementById('ftab-up').classList.toggle('on', t==='up');
-  document.getElementById('ftab-url').classList.toggle('on', t==='url');
-  document.getElementById('fp-up').classList.toggle('on', t==='up');
-  document.getElementById('fp-url').classList.toggle('on', t==='url');
-}
-
-/* ── DRAG & DROP ── */
-function onDragOver(e){ e.preventDefault(); document.getElementById('drop').classList.add('over'); }
-function onDragLeave(){ document.getElementById('drop').classList.remove('over'); }
-function onDrop(e){ e.preventDefault(); document.getElementById('drop').classList.remove('over'); var f=e.dataTransfer.files[0]; if(f&&f.type.startsWith('image/')) processFile(f); }
-function onFileChange(e){ var f=e.target.files[0]; if(f) processFile(f); }
-
-function processFile(file){
-  pendingOrigFile = file;
-  pendingFileName = Date.now()+'-'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
-  var q = parseInt(document.getElementById('cmp-range').value)/100;
-  compressFile(file, q, function(blob, kb){
-    pendingBlob = blob;
-    showFotoPreview(file.name, kb);
-  });
-}
-
-function compressFile(file, quality, cb){
-  var reader = new FileReader();
-  reader.onload = function(ev){
-    var img = new Image();
-    img.onload = function(){
-      var w=img.width, h=img.height, MAX=1920;
-      if(w>MAX||h>MAX){ if(w>h){h=Math.round(h*MAX/w);w=MAX;}else{w=Math.round(w*MAX/h);h=MAX;} }
-      var cv=document.createElement('canvas'); cv.width=w; cv.height=h;
-      cv.getContext('2d').drawImage(img,0,0,w,h);
-      cv.toBlob(function(blob){ cb(blob, Math.round(blob.size/1024)); },'image/jpeg', quality);
-    };
-    img.src = ev.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-function recompress(){
-  var v = document.getElementById('cmp-range').value;
-  document.getElementById('cmp-val').textContent = v+'%';
-  if(pendingOrigFile) processFile(pendingOrigFile);
-}
-
-function showFotoPreview(name, kb){
-  var reader = new FileReader();
-  reader.onload = function(ev){ document.getElementById('fprev-img').src = ev.target.result; };
-  reader.readAsDataURL(pendingBlob);
-  document.getElementById('fprev-name').textContent = name.length>28?name.slice(0,25)+'…':name;
-  document.getElementById('fprev-sz').textContent = kb<1024?kb+' KB':(kb/1024).toFixed(1)+' MB';
-  document.getElementById('fprev').style.display = 'block';
-  document.getElementById('cmp').style.display = 'flex';
-}
-
-function removeFoto(){
-  pendingBlob=null; pendingOrigFile=null; pendingFileName=null;
-  document.getElementById('fprev').style.display='none';
-  document.getElementById('cmp').style.display='none';
-  document.getElementById('file-inp').value='';
-}
-
-function previewUrl(){
-  var url=document.getElementById('f-url').value.trim();
-  var wrap=document.getElementById('uprev');
-  var img=document.getElementById('uprev-img');
-  if(url){ wrap.style.display='block'; img.src=url; } else { wrap.style.display='none'; }
-}
-
-/* ── UPLOAD A STORAGE ── */
-async function uploadToStorage(){
-  if(!pendingBlob||!pendingFileName) return null;
-  var prog=document.getElementById('up-prog');
-  var fill=document.getElementById('up-fill');
-  var ptxt=document.getElementById('up-prog-txt');
-  prog.style.display='block'; fill.style.width='0%'; ptxt.textContent='Subiendo foto...';
-
-  var path='platos/'+pendingFileName;
-  var r = await supabase_upload.storage.from('menu-fotos').upload(path, pendingBlob, {
-    contentType:'image/jpeg', upsert:true
-  });
-
-  if(r.error){ prog.style.display='none'; toast('Error subiendo foto: '+r.error.message,'er'); return null; }
-  fill.style.width='100%'; ptxt.textContent='Foto subida ✓';
-  setTimeout(function(){ prog.style.display='none'; },1500);
-
-  // URL pública
-  var pub = supabase_client.storage.from('menu-fotos').getPublicUrl(path);
-  return pub.data.publicUrl;
-}
-
-/* ── GUARDAR PLATO ── */
-async function savePlato(){
-  var id=document.getElementById('edit-id').value;
-  var nombre=document.getElementById('f-nom').value.trim();
-  if(!nombre){ toast('El nombre es obligatorio','er'); return; }
-
-  var fotoUrl='';
-  if(activeTab==='up'){
-    if(pendingBlob){
-      setSaving(true);
-      fotoUrl = await uploadToStorage();
-      if(!fotoUrl){ setSaving(false); return; }
-    } else if(id){
-      fotoUrl=document.getElementById('edit-url').value; // mantener la actual
-    } else { toast('Selecciona una foto','er'); return; }
-  } else {
-    fotoUrl=document.getElementById('f-url').value.trim();
-    if(!fotoUrl){ toast('Introduce una URL','er'); return; }
-  }
-
-  setSaving(true);
-  var maxOrden = platos.reduce(function(m,p){ return Math.max(m,p.orden||0); },0);
-  var data = {
-    nombre:nombre,
-    precio:document.getElementById('f-precio').value.trim(),
-    desc:document.getElementById('f-desc').value.trim(),
-    url:fotoUrl,
-    tipo:activeTab==='up'?'storage':'url',
-    activo:true
-  };
-
-  var r;
-  if(id){
-    r = await supabase_client.from('platos').update(data).eq('id',id);
-  } else {
-    data.orden = maxOrden+1;
-    r = await supabase_client.from('platos').insert([data]);
-  }
-
-  setSaving(false);
-  if(r.error){ toast('Error: '+r.error.message,'er'); return; }
-  toast((id?'Plato actualizado':'Plato añadido')+' — la TV se actualiza al instante ✓','ok');
-  clearForm();
-  loadPlatos();
-}
-
-function setSaving(on){
-  document.getElementById('save-btn').disabled=on;
-  document.getElementById('saving-txt').style.display=on?'inline':'none';
-}
-
-/* ── EDIT / TOGGLE / DELETE ── */
-function editPlato(id){
-  var p=platos.find(function(x){return x.id===id;});
-  if(!p) return;
-  document.getElementById('edit-id').value=p.id;
-  document.getElementById('edit-url').value=p.url||'';
-  document.getElementById('f-nom').value=p.nombre;
-  document.getElementById('f-precio').value=p.precio||'';
-  document.getElementById('f-desc').value=p.desc||'';
-  document.getElementById('form-title').textContent='Editando: '+p.nombre;
-  if(p.tipo==='storage'||p.tipo==='local'){
-    switchTab('up');
-    // mostrar foto actual
-    document.getElementById('fprev-img').src=p.url;
-    document.getElementById('fprev-name').textContent='Foto actual';
-    document.getElementById('fprev-sz').textContent='(en Storage)';
-    document.getElementById('fprev').style.display='block';
-    document.getElementById('cmp').style.display='none';
-  } else {
-    switchTab('url');
-    document.getElementById('f-url').value=p.url||'';
-    previewUrl();
-  }
-  document.querySelector('.form-card').scrollIntoView({behavior:'smooth'});
-}
-
-async function togglePlato(id){
-  var p=platos.find(function(x){return x.id===id;});
-  if(!p) return;
-  var r=await supabase_client.from('platos').update({activo:!p.activo}).eq('id',id);
-  if(r.error){ toast('Error: '+r.error.message,'er'); return; }
-  toast((p.activo?'Plato ocultado':'Plato activado')+' en TV','ok');
-  loadPlatos();
-}
-
-async function deletePlato(id){
-  var p=platos.find(function(x){return x.id===id;});
-  if(!confirm('¿Eliminar "'+p.nombre+'"?')) return;
-  // Borrar de Storage si aplica
-  if(p.tipo==='storage'&&p.url){
-    var path=p.url.split('/menu-fotos/')[1];
-    if(path) await supabase_upload.storage.from('menu-fotos').remove([path]);
-  }
-  var r=await supabase_client.from('platos').delete().eq('id',id);
-  if(r.error){ toast('Error: '+r.error.message,'er'); return; }
-  toast('Plato eliminado','ok');
-  loadPlatos();
-}
-
-async function moveOrden(id, dir){
-  var i=platos.findIndex(function(x){return x.id===id;});
-  var j=i+dir;
-  if(j<0||j>=platos.length) return;
-  var a=platos[i], b=platos[j];
-  var oa=a.orden||i, ob=b.orden||j;
-  await Promise.all([
-    supabase_client.from('platos').update({orden:ob}).eq('id',a.id),
-    supabase_client.from('platos').update({orden:oa}).eq('id',b.id)
-  ]);
-  loadPlatos();
-}
-
-function clearForm(){
-  ['edit-id','edit-url','f-nom','f-precio','f-desc','f-url'].forEach(function(k){ document.getElementById(k).value=''; });
-  document.getElementById('form-title').textContent='Añadir plato';
-  removeFoto();
-  document.getElementById('uprev').style.display='none';
-  switchTab('up');
-}
-
-/* ── RENDER GRID ── */
-function renderGrid(){
-  var grid=document.getElementById('grid');
-  document.getElementById('count').textContent=platos.length+' plato'+(platos.length!==1?'s':'');
-  if(!platos.length){
-    grid.innerHTML='<div class="empty"><div style="font-size:32px;margin-bottom:8px">🍽</div><p>Aún no hay platos. Añade el primero arriba.</p></div>';
-    return;
-  }
-  grid.innerHTML=platos.map(function(p,i){
-    var badge=p.tipo==='storage'?'<span class="ibadge cloud">☁ Storage</span>':'<span class="ibadge loc">🔗 URL</span>';
-    return '<div class="card">'
-      +(p.url?'<img src="'+p.url+'" alt="'+p.nombre+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">':'')
-      +'<div class="nopic" style="'+(p.url?'display:none':'')+'">Sin imagen</div>'
-      +badge
-      +(!p.activo?'<div class="offbadge">Oculto</div>':'')
-      +'<div class="ord-btns">'
-        +(i>0?'<button class="ob" onclick="moveOrden(\''+p.id+'\',-1)" title="Subir">▲</button>':'')
-        +(i<platos.length-1?'<button class="ob" onclick="moveOrden(\''+p.id+'\',1)" title="Bajar">▼</button>':'')
-      +'</div>'
-      +'<div class="ci">'
-        +'<div class="nm" title="'+p.nombre+'">'+p.nombre+'</div>'
-        +(p.precio?'<div class="pr">'+((configData.moneda||'€'))+p.precio+'</div>':'')
-        +(p.desc?'<div class="ds">'+p.desc+'</div>':'')
-      +'</div>'
-      +'<div class="acts">'
-        +'<button class="btn btn-ghost btn-sm" onclick="editPlato(\''+p.id+'\')">✏ Editar</button>'
-        +'<button class="btn btn-ghost btn-sm" onclick="togglePlato(\''+p.id+'\')">'+(p.activo?'👁 Ocultar':'👁 Mostrar')+'</button>'
-        +'<button class="btn btn-err btn-sm" onclick="deletePlato(\''+p.id+'\')">✕</button>'
-      +'</div>'
-    +'</div>';
+/* ── SLIDESHOW ── */
+function buildDots(){
+  document.getElementById('dots').innerHTML = platos.map(function(_,i){
+    return '<div class="dot'+(i===idx?' on':'')+'"></div>';
   }).join('');
 }
-
-/* ── TOAST ── */
-var toastTimer;
-function toast(msg, type){
-  var el=document.getElementById('toast');
-  el.textContent=msg; el.className='show '+(type||'');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(function(){ el.className=''; },3500);
+function updateDots(){
+  document.querySelectorAll('.dot').forEach(function(d,i){ d.classList.toggle('on',i===idx); });
 }
 
-/* ── INIT ── */
-if(SUPA_URL&&SUPA_KEY){
-  document.getElementById('setup').style.display='none';
-  initSupabase();
+function showSlide(i, instant){
+  var p = platos[i];
+  var next = slot === 'a' ? 'b' : 'a';
+  var nEl = document.getElementById('slide-'+next);
+  var cEl = document.getElementById('slide-'+slot);
+
+  nEl.style.backgroundImage = 'url('+p.url+')';
+  nEl.style.zIndex = 2; cEl.style.zIndex = 1;
+
+  var t = parseInt(config.tiempo)||6;
+
+  document.getElementById('nombre').textContent = p.nombre;
+  document.getElementById('desc').textContent = p.desc || '';
+  document.getElementById('precio').textContent = p.precio ? (config.moneda||'€')+p.precio : '';
+  document.getElementById('badge').textContent = (i+1)+' / '+platos.length;
+  updateDots();
+
+  if(instant){
+    nEl.style.transition = 'none';
+    nEl.classList.add('visible'); nEl.classList.remove('out');
+    cEl.classList.add('out'); cEl.classList.remove('visible');
+    slot = next;
+    startProgress(t); scheduleNext(t); return;
+  }
+
+  nEl.style.transition = 'opacity 1.2s ease';
+  setTimeout(function(){
+    nEl.classList.add('visible'); nEl.classList.remove('out');
+    cEl.classList.remove('visible'); cEl.classList.add('out');
+    setTimeout(function(){ cEl.classList.remove('out'); cEl.style.backgroundImage=''; },1300);
+    slot = next;
+  }, 40);
+
+  startProgress(t); scheduleNext(t);
 }
+
+function scheduleNext(t){
+  clearTimeout(timer);
+  if(paused) return;
+  timer = setTimeout(function(){
+    idx = (idx+1) % platos.length;
+    showSlide(idx);
+  }, (t||(parseInt(config.tiempo)||6)) * 1000);
+}
+
+function startProgress(t){
+  clearInterval(progInt);
+  var bar = document.getElementById('bar');
+  bar.style.transition = 'none'; bar.style.width = '0%';
+  var elapsed = 0, total = (t||(parseInt(config.tiempo)||6))*1000;
+  progInt = setInterval(function(){
+    if(paused) return;
+    elapsed += 50;
+    bar.style.width = Math.min(100,(elapsed/total)*100)+'%';
+    if(elapsed >= total) clearInterval(progInt);
+  }, 50);
+}
+
+/* ── PAUSA ── */
+document.body.addEventListener('click', function(){
+  paused = !paused;
+  document.getElementById('paused').style.display = paused ? 'flex' : 'none';
+  if(!paused){ scheduleNext(); startProgress(); }
+  else{ clearTimeout(timer); clearInterval(progInt); }
+});
+
+/* ── TECLADO ── */
+document.addEventListener('keydown', function(e){
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){ clearTimeout(timer); idx=(idx+1)%platos.length; showSlide(idx); }
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){ clearTimeout(timer); idx=(idx-1+platos.length)%platos.length; showSlide(idx); }
+  if(e.key===' '){ e.preventDefault(); document.body.click(); }
+  if(e.key==='f'||e.key==='F'){
+    if(!document.fullscreenElement) document.documentElement.requestFullscreen().catch(function(){});
+    else document.exitFullscreen();
+  }
+  if(e.key==='c'||e.key==='C'){
+    localStorage.removeItem('tv_supa_url'); localStorage.removeItem('tv_supa_key');
+    location.reload();
+  }
+});
+
+/* ── HELPERS ── */
+function showLoader(msg){
+  document.getElementById('loader').style.display = 'flex';
+  document.getElementById('loader-txt').textContent = msg;
+}
+function updateClock(){
+  var n = new Date();
+  document.getElementById('clock').textContent =
+    n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0');
+}
+
+/* ── START ── */
+init();
 </script>
 </body>
 </html>

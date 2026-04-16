@@ -285,7 +285,7 @@ function showSlide(i, instant){
   var t = parseInt(config.tiempo)||6;
 
   document.getElementById('nombre').textContent = p.nombre;
-  document.getElementById('desc').textContent = p.desc || '';
+  document.getElementById('desc').textContent = p.descripcion || '';
   document.getElementById('precio').textContent = p.precio ? (config.moneda||'€')+p.precio : '';
   document.getElementById('badge').textContent = (i+1)+' / '+platos.length;
   updateDots();
