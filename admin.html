@@ -13,7 +13,6 @@
 }
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
-/* SETUP OVERLAY */
 #setup{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.96);display:flex;align-items:center;justify-content:center}
 .setup-box{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:36px;width:480px;max-width:92vw}
 .setup-box h1{font-size:20px;font-weight:600;color:var(--accent);margin-bottom:4px}
@@ -27,7 +26,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .setup-note{margin-top:16px;font-size:11px;color:var(--muted);line-height:1.6;padding:10px;background:rgba(0,0,0,.3);border-radius:6px}
 .setup-note code{color:var(--accent);font-size:11px}
 
-/* HEADER */
 .hdr{background:var(--s1);border-bottom:1px solid var(--border);padding:13px 26px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40}
 .logo{font-size:17px;font-weight:600;color:var(--accent)}
 .logo span{color:var(--text);font-weight:400}
@@ -36,7 +34,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .live-dot.off{background:var(--err)}
 .hdr-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
-/* BOTONES */
 .btn{border:none;border-radius:8px;padding:8px 15px;font-size:13px;font-weight:500;cursor:pointer;transition:opacity .15s,transform .1s;display:inline-flex;align-items:center;gap:6px}
 .btn:active{transform:scale(.97)}
 .btn-accent{background:var(--accent);color:#1a1000}
@@ -44,14 +41,13 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .btn-ok{background:var(--ok);color:#fff}
 .btn-ok:hover{opacity:.88}
 .btn-err{background:var(--err);color:#fff}
+.btn-err:hover{opacity:.88}
 .btn-ghost{background:var(--s2);color:var(--text);border:1px solid var(--border)}
 .btn-ghost:hover{background:var(--s3)}
 .btn-sm{font-size:11px;padding:5px 10px;border-radius:6px}
 
-/* BODY */
 .body{max-width:1020px;margin:0 auto;padding:26px 22px}
 
-/* CONFIG BAR */
 .cfg-bar{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .cfg-bar label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
 .cfg-bar input[type=text]{background:var(--s2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;font-size:13px;width:170px}
@@ -59,7 +55,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .cfg-bar select{background:var(--s2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;font-size:13px}
 .cfg-save-btn{align-self:flex-end}
 
-/* FORM */
 .form-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:22px}
 .form-title{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin-bottom:14px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
@@ -70,21 +65,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
 .field textarea{resize:vertical;min-height:52px}
 
-/* TABS FOTO */
 .ftabs{display:flex;gap:2px;margin-bottom:0}
 .ftab{padding:6px 14px;font-size:12px;font-weight:500;border-radius:6px 6px 0 0;cursor:pointer;border:1px solid var(--border);border-bottom:none;color:var(--muted);background:var(--s2);transition:all .15s}
 .ftab.on{background:var(--s3);color:var(--text);border-color:var(--accent)}
 .fpanel{display:none;border:1px solid var(--border);border-radius:0 6px 6px 6px;padding:12px;background:var(--s2)}
 .fpanel.on{display:block}
 
-/* MEDIA BADGES en grid */
-.media-badge{position:absolute;bottom:6px;left:6px;font-size:10px;padding:2px 7px;border-radius:4px;font-weight:500;pointer-events:none}
-.media-badge.foto{background:rgba(0,0,0,.6);color:#aaa}
-.media-badge.gif{background:rgba(29,158,117,.85);color:#fff}
-.media-badge.video{background:rgba(212,168,75,.9);color:#1a1000}
-.card video.thumb-vid{width:100%;height:122px;object-fit:cover;display:block;background:#000}
-
-/* DROPZONE */
 .drop{border:2px dashed var(--border);border-radius:8px;padding:22px 16px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
 .drop:hover,.drop.over{border-color:var(--accent);background:rgba(212,168,75,.06)}
 .drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
@@ -92,42 +78,36 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .drop p strong{color:var(--accent)}
 .drop small{font-size:11px;color:var(--muted);margin-top:3px;display:block}
 
-/* UPLOAD PROGRESS */
 .up-prog{margin-top:8px;display:none}
 .up-prog-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:6px}
 .up-prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s;width:0%}
 .up-prog p{font-size:12px;color:var(--muted)}
 
-/* COMPRESS */
 .cmp{margin-top:8px;display:none;align-items:center;gap:8px;background:rgba(0,0,0,.2);border-radius:6px;padding:7px 10px}
 .cmp label{font-size:11px;color:var(--muted);white-space:nowrap}
 .cmp input[type=range]{flex:1;accent-color:var(--accent)}
 .cmp span{font-size:11px;color:var(--accent);min-width:34px;font-weight:500}
 
-/* FOTO PREVIEW */
 .fprev{margin-top:8px;border-radius:7px;overflow:hidden;display:none;background:var(--s1)}
-.fprev img{width:100%;max-height:140px;object-fit:cover;display:block}
+.fprev img,.fprev video{width:100%;max-height:140px;object-fit:cover;display:block}
 .fprev-info{padding:6px 10px;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--muted);flex-wrap:wrap;gap:4px}
 .fprev-info .sz{color:var(--accent);font-weight:500}
 .rmfoto{background:none;border:none;color:var(--err);cursor:pointer;font-size:12px;padding:2px 6px}
 
-/* URL PREVIEW */
 .uprev{margin-top:7px;border-radius:6px;overflow:hidden;display:none}
-.uprev img{width:100%;height:110px;object-fit:cover;display:block}
+.uprev img,.uprev video{width:100%;height:110px;object-fit:cover;display:block}
 
-/* FORM ACTIONS */
 .form-acts{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:center}
 
-/* SECTION HEADER */
 .sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .sh h2{font-size:14px;font-weight:500}
 .sh span{font-size:12px;color:var(--muted)}
 
-/* GRID PLATOS */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:12px}
 .card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;position:relative;transition:border-color .15s}
 .card:hover{border-color:var(--accent)}
-.card img{width:100%;height:122px;object-fit:cover;display:block;background:var(--s2)}
+.card img.thumb{width:100%;height:122px;object-fit:cover;display:block;background:var(--s2)}
+.card video.thumb{width:100%;height:122px;object-fit:cover;display:block;background:#000}
 .card .nopic{width:100%;height:122px;background:var(--s2);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px}
 .card .ci{padding:9px 11px}
 .card .nm{font-size:13px;font-weight:500;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -138,14 +118,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .ibadge.cloud{color:#60a5fa}
 .ibadge.loc{color:var(--accent)}
 .offbadge{position:absolute;top:6px;right:6px;background:rgba(226,75,74,.85);border-radius:4px;padding:2px 7px;font-size:10px;color:#fff}
+.media-badge{position:absolute;bottom:68px;left:6px;font-size:10px;padding:2px 7px;border-radius:4px;font-weight:500;pointer-events:none}
+.media-badge.tipo-foto{background:rgba(0,0,0,.6);color:#aaa}
+.media-badge.tipo-gif{background:rgba(29,158,117,.85);color:#fff}
+.media-badge.tipo-video{background:rgba(212,168,75,.9);color:#1a1000}
 .ord-btns{position:absolute;top:34px;right:6px;display:flex;flex-direction:column;gap:3px}
 .ob{background:rgba(0,0,0,.65);border:none;color:#ccc;border-radius:3px;padding:2px 6px;font-size:11px;cursor:pointer}
 .ob:hover{background:rgba(212,168,75,.4);color:#fff}
 
-/* EMPTY */
 .empty{text-align:center;padding:50px 20px;color:var(--muted);grid-column:1/-1}
 
-/* TOAST */
 #toast{position:fixed;bottom:22px;right:22px;z-index:9999;background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:13px;color:var(--text);opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;max-width:300px}
 #toast.show{opacity:1;transform:translateY(0)}
 #toast.ok{border-color:var(--ok);color:var(--ok)}
@@ -154,11 +136,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 </head>
 <body>
 
-<!-- SETUP OVERLAY -->
 <div id="setup">
   <div class="setup-box">
     <h1>MenuSlide Admin</h1>
-    <p>Introduce tus credenciales de Supabase para empezar. Solo se hace una vez.</p>
+    <p>Introduce tus credenciales de Supabase. Solo se hace una vez.</p>
     <div class="setup-field">
       <label>Project URL</label>
       <input type="text" id="su-url" placeholder="https://xxxxxxxxxxxx.supabase.co">
@@ -168,18 +149,17 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
       <input type="text" id="su-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
     </div>
     <div class="setup-field">
-      <label>Service role key <span style="color:var(--muted)">(para Storage)</span></label>
+      <label>Service role key <span style="color:var(--muted);font-weight:400">(para Storage)</span></label>
       <input type="text" id="su-svc" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
     </div>
     <button class="setup-btn" onclick="saveSetup()">Conectar y empezar</button>
     <div class="setup-note">
-      Encuéntrate las keys en tu proyecto Supabase → <code>Settings → API</code>.<br>
-      La service role key solo se usa en este panel de admin (nunca en la TV).
+      Keys en tu proyecto Supabase → <code>Settings → API</code>.<br>
+      La service role key solo se usa en este admin (nunca en la TV).
     </div>
   </div>
 </div>
 
-<!-- HEADER -->
 <div class="hdr">
   <div style="display:flex;align-items:center;gap:16px">
     <div class="logo">Menu<span>Slide</span></div>
@@ -196,15 +176,13 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
 <div class="body">
 
-  <!-- CONFIG -->
   <div class="cfg-bar">
-    <label>Nombre restaurante<input type="text" id="cfg-rest" value="" oninput=""></label>
+    <label>Nombre restaurante<input type="text" id="cfg-rest" value=""></label>
     <label>Segundos por foto<input type="number" id="cfg-seg" value="6" min="2" max="60"></label>
     <label>Moneda<input type="text" id="cfg-mon" value="€" style="width:54px"></label>
     <button class="btn btn-ok btn-sm cfg-save-btn" onclick="saveConfig()">Guardar config</button>
   </div>
 
-  <!-- FORM -->
   <div class="form-card">
     <div class="form-title" id="form-title">Añadir plato</div>
     <input type="hidden" id="edit-id">
@@ -219,25 +197,25 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
     </div>
 
     <div class="field" style="margin-top:4px">
-      <label>Fotografía *</label>
+      <label>Fotografía / Video / GIF *</label>
       <div class="ftabs">
-        <div class="ftab on" id="ftab-up" onclick="switchTab('up')">⬆ Subir a Supabase Storage</div>
+        <div class="ftab on" id="ftab-up" onclick="switchTab('up')">⬆ Subir archivo</div>
         <div class="ftab" id="ftab-url" onclick="switchTab('url')">🔗 URL externa</div>
       </div>
 
       <div class="fpanel on" id="fp-up">
         <div class="drop" id="drop" ondragover="onDragOver(event)" ondragleave="onDragLeave()" ondrop="onDrop(event)">
-          <input type="file" accept="image/*,video/mp4,video/webm,video/ogg,.gif" id="file-inp" onchange="onFileChange(event)">
+          <input type="file" accept="image/*,image/gif,video/mp4,video/webm,video/ogg" id="file-inp" onchange="onFileChange(event)">
           <p><strong>Haz clic o arrastra</strong> el archivo aquí</p>
-          <small>Fotos: JPG, PNG, WEBP (se comprimen) · GIF animado · Video: MP4, WebM</small>
+          <small>📷 Fotos: JPG, PNG, WEBP (se comprimen) &nbsp;·&nbsp; ⟳ GIF animado &nbsp;·&nbsp; ▶ Video: MP4, WebM</small>
         </div>
         <div class="cmp" id="cmp">
-          <label>Calidad:</label>
+          <label>Calidad (solo fotos):</label>
           <input type="range" min="20" max="100" value="80" step="1" id="cmp-range" oninput="recompress()">
           <span id="cmp-val">80%</span>
         </div>
         <div class="fprev" id="fprev">
-          <img id="fprev-img" src="" alt="">
+          <img id="fprev-img" src="" alt="" style="display:none">
           <div class="fprev-info">
             <span id="fprev-name">—</span>
             <span class="sz" id="fprev-sz">—</span>
@@ -252,8 +230,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
       <div class="fpanel" id="fp-url">
         <div class="field">
-          <input type="text" id="f-url" placeholder="https://ejemplo.com/foto.jpg" oninput="previewUrl()" style="width:100%">
-          <div class="uprev" id="uprev"><img id="uprev-img" src="" alt=""></div>
+          <input type="text" id="f-url" placeholder="https://ejemplo.com/foto.jpg  o  .mp4  o  .gif" oninput="previewUrl()" style="width:100%;background:var(--s1);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:8px 12px;font-size:13px">
+          <div class="uprev" id="uprev">
+            <img id="uprev-img" src="" alt="" style="display:none">
+            <video id="uprev-vid" muted loop autoplay playsinline style="display:none;width:100%;height:110px;object-fit:cover"></video>
+          </div>
         </div>
       </div>
     </div>
@@ -265,7 +246,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
     </div>
   </div>
 
-  <!-- GRID -->
   <div class="sh">
     <h2>Platos del menú</h2>
     <span id="count">0 platos</span>
@@ -278,388 +258,436 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-/* ── CREDENCIALES ── */
+/* ══ CREDENCIALES ══ */
 var SUPA_URL = localStorage.getItem('adm_supa_url') || '';
-var SUPA_KEY = localStorage.getItem('adm_supa_key') || ''; // anon
-var SUPA_SVC = localStorage.getItem('adm_supa_svc') || ''; // service role
-var supabase_client, supabase_upload;
+var SUPA_KEY = localStorage.getItem('adm_supa_key') || '';
+var SUPA_SVC = localStorage.getItem('adm_supa_svc') || '';
+var sb, sbUp;
 var platos = [], configData = {};
 var activeTab = 'up';
 var pendingBlob = null, pendingOrigFile = null, pendingFileName = null;
 
-function saveSetup(){
+function saveSetup() {
   SUPA_URL = document.getElementById('su-url').value.trim();
   SUPA_KEY = document.getElementById('su-key').value.trim();
   SUPA_SVC = document.getElementById('su-svc').value.trim();
-  if(!SUPA_URL||!SUPA_KEY){ alert('URL y anon key son obligatorios.'); return; }
+  if (!SUPA_URL || !SUPA_KEY) { alert('URL y anon key son obligatorios.'); return; }
   localStorage.setItem('adm_supa_url', SUPA_URL);
   localStorage.setItem('adm_supa_key', SUPA_KEY);
-  if(SUPA_SVC) localStorage.setItem('adm_supa_svc', SUPA_SVC);
+  if (SUPA_SVC) localStorage.setItem('adm_supa_svc', SUPA_SVC);
   document.getElementById('setup').style.display = 'none';
   initSupabase();
 }
 
-function resetSetup(){
+function resetSetup() {
   ['adm_supa_url','adm_supa_key','adm_supa_svc'].forEach(function(k){ localStorage.removeItem(k); });
   location.reload();
 }
 
-/* ── INIT ── */
-function initSupabase(){
-  if(!SUPA_URL||!SUPA_KEY){ document.getElementById('setup').style.display='flex'; return; }
+/* ══ INIT ══ */
+function initSupabase() {
+  if (!SUPA_URL || !SUPA_KEY) { document.getElementById('setup').style.display = 'flex'; return; }
   document.getElementById('setup').style.display = 'none';
-  supabase_client = window.supabase.createClient(SUPA_URL, SUPA_KEY);
-  // Para uploads usamos service key si existe, si no anon
-  supabase_upload = SUPA_SVC
-    ? window.supabase.createClient(SUPA_URL, SUPA_SVC)
-    : supabase_client;
+  sb   = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+  sbUp = SUPA_SVC ? window.supabase.createClient(SUPA_URL, SUPA_SVC) : sb;
   subscribeRealtime();
   loadAll();
 }
 
-/* ── REALTIME ── */
-function subscribeRealtime(){
-  var ch = supabase_client.channel('admin-watch')
-    .on('postgres_changes',{event:'*',schema:'public',table:'platos'}, function(){ loadPlatos(); })
+/* ══ REALTIME ══ */
+function subscribeRealtime() {
+  sb.channel('admin-watch')
+    .on('postgres_changes', {event:'*', schema:'public', table:'platos'}, function(){ loadPlatos(); })
     .subscribe(function(s){
       var dot = document.getElementById('live-dot');
       var txt = document.getElementById('live-txt');
-      if(s==='SUBSCRIBED'){ dot.classList.remove('off'); txt.textContent='Conectado en tiempo real'; }
-      else { dot.classList.add('off'); txt.textContent='Sin conexión realtime'; }
+      if (s === 'SUBSCRIBED') { dot.classList.remove('off'); txt.textContent = 'Conectado en tiempo real'; }
+      else { dot.classList.add('off'); txt.textContent = 'Sin conexión realtime'; }
     });
 }
 
-/* ── CARGA ── */
-async function loadAll(){
-  await Promise.all([loadConfig(), loadPlatos()]);
-}
+/* ══ CARGA ══ */
+async function loadAll() { await Promise.all([loadConfig(), loadPlatos()]); }
 
-async function loadConfig(){
-  var r = await supabase_client.from('config').select('*').single();
-  if(r.data){
+async function loadConfig() {
+  var r = await sb.from('config').select('*').single();
+  if (r.data) {
     configData = r.data;
     document.getElementById('cfg-rest').value = r.data.restaurant || '';
-    document.getElementById('cfg-seg').value = r.data.tiempo || 6;
-    document.getElementById('cfg-mon').value = r.data.moneda || '€';
+    document.getElementById('cfg-seg').value  = r.data.tiempo || 6;
+    document.getElementById('cfg-mon').value  = r.data.moneda || '€';
   }
 }
 
-async function loadPlatos(){
-  var r = await supabase_client.from('platos').select('*').order('orden',{ascending:true});
-  if(r.error){ toast('Error al cargar platos: '+r.error.message,'er'); return; }
+async function loadPlatos() {
+  var r = await sb.from('platos').select('*').order('orden', {ascending:true});
+  if (r.error) { toast('Error al cargar: ' + r.error.message, 'er'); return; }
   platos = r.data || [];
   renderGrid();
 }
 
-/* ── GUARDAR CONFIG ── */
-async function saveConfig(){
+/* ══ CONFIG ══ */
+async function saveConfig() {
   var data = {
     restaurant: document.getElementById('cfg-rest').value.trim(),
-    tiempo: parseInt(document.getElementById('cfg-seg').value)||6,
-    moneda: document.getElementById('cfg-mon').value.trim()||'€'
+    tiempo:     parseInt(document.getElementById('cfg-seg').value) || 6,
+    moneda:     document.getElementById('cfg-mon').value.trim() || '€'
   };
-  var r;
-  if(configData.id){
-    r = await supabase_client.from('config').update(data).eq('id',configData.id);
-  } else {
-    r = await supabase_client.from('config').insert([data]);
-  }
-  if(r.error){ toast('Error: '+r.error.message,'er'); return; }
-  toast('Configuración guardada — la TV se actualiza al instante','ok');
+  var r = configData.id
+    ? await sb.from('config').update(data).eq('id', configData.id)
+    : await sb.from('config').insert([data]);
+  if (r.error) { toast('Error: ' + r.error.message, 'er'); return; }
+  toast('Config guardada — TV actualizada al instante', 'ok');
   loadConfig();
 }
 
-/* ── TABS FOTO ── */
-function switchTab(t){
+/* ══ TABS ══ */
+function switchTab(t) {
   activeTab = t;
-  document.getElementById('ftab-up').classList.toggle('on', t==='up');
-  document.getElementById('ftab-url').classList.toggle('on', t==='url');
-  document.getElementById('fp-up').classList.toggle('on', t==='up');
-  document.getElementById('fp-url').classList.toggle('on', t==='url');
+  document.getElementById('ftab-up').classList.toggle('on', t === 'up');
+  document.getElementById('ftab-url').classList.toggle('on', t === 'url');
+  document.getElementById('fp-up').classList.toggle('on', t === 'up');
+  document.getElementById('fp-url').classList.toggle('on', t === 'url');
 }
 
-/* ── DRAG & DROP ── */
-function onDragOver(e){ e.preventDefault(); document.getElementById('drop').classList.add('over'); }
-function onDragLeave(){ document.getElementById('drop').classList.remove('over'); }
-function onDrop(e){ e.preventDefault(); document.getElementById('drop').classList.remove('over'); var f=e.dataTransfer.files[0]; if(f&&f.type.startsWith('image/')) processFile(f); }
-function onFileChange(e){ var f=e.target.files[0]; if(f) processFile(f); }
+/* ══ DETECCIÓN DE TIPO ══ */
+function detectTipoArchivo(file) {
+  var n = file.name.toLowerCase();
+  if (file.type.startsWith('video/') || n.endsWith('.mp4') || n.endsWith('.webm') || n.endsWith('.mov') || n.endsWith('.ogg')) return 'video';
+  if (file.type === 'image/gif' || n.endsWith('.gif')) return 'gif';
+  return 'imagen';
+}
 
-function processFile(file){
+function detectTipoUrl(url) {
+  if (!url) return 'imagen';
+  var u = url.toLowerCase().split('?')[0];
+  if (u.endsWith('.mp4') || u.endsWith('.webm') || u.endsWith('.ogg') || u.endsWith('.mov')) return 'video';
+  if (u.endsWith('.gif')) return 'gif';
+  return 'imagen';
+}
+
+/* ══ DRAG & DROP ══ */
+function onDragOver(e) { e.preventDefault(); document.getElementById('drop').classList.add('over'); }
+function onDragLeave()  { document.getElementById('drop').classList.remove('over'); }
+function onDrop(e) {
+  e.preventDefault();
+  document.getElementById('drop').classList.remove('over');
+  var f = e.dataTransfer.files[0];
+  if (f) processFile(f);
+}
+function onFileChange(e) { var f = e.target.files[0]; if (f) processFile(f); }
+
+/* ══ PROCESAR ARCHIVO ══ */
+function processFile(file) {
   pendingOrigFile = file;
-  pendingFileName = Date.now()+'-'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
-  var q = parseInt(document.getElementById('cmp-range').value)/100;
-  compressFile(file, q, function(blob, kb){
-    pendingBlob = blob;
-    showFotoPreview(file.name, kb);
-  });
+  pendingFileName = Date.now() + '-' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+  var tipo = detectTipoArchivo(file);
+  if (tipo === 'video' || tipo === 'gif') {
+    pendingBlob = file;
+    var kb = Math.round(file.size / 1024);
+    document.getElementById('cmp').style.display = 'none';
+    showFotoPreview(file.name, kb, tipo);
+  } else {
+    var q = parseInt(document.getElementById('cmp-range').value) / 100;
+    compressFile(file, q, function(blob, kb) {
+      pendingBlob = blob;
+      showFotoPreview(file.name, kb, 'imagen');
+    });
+  }
 }
 
-function compressFile(file, quality, cb){
+function compressFile(file, quality, cb) {
   var reader = new FileReader();
-  reader.onload = function(ev){
+  reader.onload = function(ev) {
     var img = new Image();
-    img.onload = function(){
-      var w=img.width, h=img.height, MAX=1920;
-      if(w>MAX||h>MAX){ if(w>h){h=Math.round(h*MAX/w);w=MAX;}else{w=Math.round(w*MAX/h);h=MAX;} }
-      var cv=document.createElement('canvas'); cv.width=w; cv.height=h;
-      cv.getContext('2d').drawImage(img,0,0,w,h);
-      cv.toBlob(function(blob){ cb(blob, Math.round(blob.size/1024)); },'image/jpeg', quality);
+    img.onload = function() {
+      var w = img.width, h = img.height, MAX = 1920;
+      if (w > MAX || h > MAX) { if (w > h) { h = Math.round(h*MAX/w); w = MAX; } else { w = Math.round(w*MAX/h); h = MAX; } }
+      var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+      cv.getContext('2d').drawImage(img, 0, 0, w, h);
+      cv.toBlob(function(blob) { cb(blob, Math.round(blob.size/1024)); }, 'image/jpeg', quality);
     };
     img.src = ev.target.result;
   };
   reader.readAsDataURL(file);
 }
 
-function recompress(){
+function recompress() {
   var v = document.getElementById('cmp-range').value;
-  document.getElementById('cmp-val').textContent = v+'%';
-  if(pendingOrigFile) processFile(pendingOrigFile);
+  document.getElementById('cmp-val').textContent = v + '%';
+  if (pendingOrigFile && detectTipoArchivo(pendingOrigFile) === 'imagen') processFile(pendingOrigFile);
 }
 
-function showFotoPreview(name, kb){
+function showFotoPreview(name, kb, tipo) {
+  var fprev = document.getElementById('fprev');
+  fprev.style.display = 'block';
+  document.getElementById('fprev-name').textContent = name.length > 30 ? name.slice(0,27) + '…' : name;
+  document.getElementById('fprev-sz').textContent = kb < 1024 ? kb + ' KB' : (kb/1024).toFixed(1) + ' MB';
+
+  var imgEl = document.getElementById('fprev-img');
+  var existVid = document.getElementById('fprev-vid');
+  if (existVid) existVid.remove();
+
   var reader = new FileReader();
-  reader.onload = function(ev){ document.getElementById('fprev-img').src = ev.target.result; };
-  reader.readAsDataURL(pendingBlob);
-  document.getElementById('fprev-name').textContent = name.length>28?name.slice(0,25)+'…':name;
-  document.getElementById('fprev-sz').textContent = kb<1024?kb+' KB':(kb/1024).toFixed(1)+' MB';
-  document.getElementById('fprev').style.display = 'block';
-  document.getElementById('cmp').style.display = 'flex';
-}
-
-function removeFoto(){
-  pendingBlob=null; pendingOrigFile=null; pendingFileName=null;
-  document.getElementById('fprev').style.display='none';
-  document.getElementById('cmp').style.display='none';
-  document.getElementById('file-inp').value='';
-}
-
-function previewUrl(){
-  var url=document.getElementById('f-url').value.trim();
-  var wrap=document.getElementById('uprev');
-  var img=document.getElementById('uprev-img');
-  if(url){ wrap.style.display='block'; img.src=url; } else { wrap.style.display='none'; }
-}
-
-/* ── UPLOAD A STORAGE ── */
-async function uploadToStorage(){
-  if(!pendingBlob||!pendingFileName) return null;
-  var prog=document.getElementById('up-prog');
-  var fill=document.getElementById('up-fill');
-  var ptxt=document.getElementById('up-prog-txt');
-  prog.style.display='block'; fill.style.width='0%'; ptxt.textContent='Subiendo foto...';
-
-  var path='platos/'+pendingFileName;
-  var contentType = 'image/jpeg';
-  if(pendingOrigFile){
-    if(pendingOrigFile.type) contentType = pendingOrigFile.type;
-    else if(pendingFileName.endsWith('.mp4')) contentType = 'video/mp4';
-    else if(pendingFileName.endsWith('.webm')) contentType = 'video/webm';
-    else if(pendingFileName.endsWith('.gif')) contentType = 'image/gif';
+  if (tipo === 'video') {
+    imgEl.style.display = 'none';
+    reader.onload = function(ev) {
+      var vid = document.createElement('video');
+      vid.id = 'fprev-vid';
+      vid.src = ev.target.result;
+      vid.muted = true; vid.autoplay = true; vid.loop = true; vid.playsInline = true;
+      vid.style.cssText = 'width:100%;max-height:140px;object-fit:cover;display:block';
+      fprev.insertBefore(vid, fprev.firstChild);
+    };
+    reader.readAsDataURL(pendingBlob);
+    document.getElementById('cmp').style.display = 'none';
+  } else {
+    imgEl.style.display = 'block';
+    reader.onload = function(ev) { imgEl.src = ev.target.result; };
+    reader.readAsDataURL(pendingBlob);
+    document.getElementById('cmp').style.display = tipo === 'imagen' ? 'flex' : 'none';
   }
-  var r = await supabase_upload.storage.from('menu-fotos').upload(path, pendingBlob, {
-    contentType: contentType, upsert:true
-  });
+}
 
-  if(r.error){ prog.style.display='none'; toast('Error subiendo foto: '+r.error.message,'er'); return null; }
-  fill.style.width='100%'; ptxt.textContent='Foto subida ✓';
-  setTimeout(function(){ prog.style.display='none'; },1500);
+function removeFoto() {
+  pendingBlob = null; pendingOrigFile = null; pendingFileName = null;
+  document.getElementById('fprev').style.display = 'none';
+  document.getElementById('cmp').style.display = 'none';
+  document.getElementById('file-inp').value = '';
+  var imgEl = document.getElementById('fprev-img');
+  imgEl.src = ''; imgEl.style.display = 'none';
+  var vid = document.getElementById('fprev-vid');
+  if (vid) vid.remove();
+}
 
-  // URL pública
-  var pub = supabase_client.storage.from('menu-fotos').getPublicUrl(path);
+function previewUrl() {
+  var url = document.getElementById('f-url').value.trim();
+  var wrap = document.getElementById('uprev');
+  var imgEl = document.getElementById('uprev-img');
+  var vidEl = document.getElementById('uprev-vid');
+  if (!url) { wrap.style.display = 'none'; return; }
+  var tipo = detectTipoUrl(url);
+  wrap.style.display = 'block';
+  if (tipo === 'video') {
+    imgEl.style.display = 'none';
+    vidEl.src = url; vidEl.style.display = 'block';
+  } else {
+    vidEl.style.display = 'none'; vidEl.src = '';
+    imgEl.src = url; imgEl.style.display = 'block';
+  }
+}
+
+/* ══ UPLOAD A STORAGE ══ */
+async function uploadToStorage() {
+  if (!pendingBlob || !pendingFileName) return null;
+  var prog = document.getElementById('up-prog');
+  var fill = document.getElementById('up-fill');
+  var ptxt = document.getElementById('up-prog-txt');
+  prog.style.display = 'block'; fill.style.width = '0%'; ptxt.textContent = 'Subiendo...';
+
+  var contentType = 'image/jpeg';
+  if (pendingOrigFile && pendingOrigFile.type) contentType = pendingOrigFile.type;
+
+  var path = 'platos/' + pendingFileName;
+  var r = await sbUp.storage.from('menu-fotos').upload(path, pendingBlob, { contentType: contentType, upsert: true });
+
+  if (r.error) { prog.style.display = 'none'; toast('Error subiendo: ' + r.error.message, 'er'); return null; }
+  fill.style.width = '100%'; ptxt.textContent = 'Subido ✓';
+  setTimeout(function(){ prog.style.display = 'none'; }, 1500);
+
+  var pub = sb.storage.from('menu-fotos').getPublicUrl(path);
   return pub.data.publicUrl;
 }
 
-/* ── GUARDAR PLATO ── */
-async function savePlato(){
-  var id=document.getElementById('edit-id').value;
-  var nombre=document.getElementById('f-nom').value.trim();
-  if(!nombre){ toast('El nombre es obligatorio','er'); return; }
+/* ══ GUARDAR PLATO ══ */
+async function savePlato() {
+  var id     = document.getElementById('edit-id').value;
+  var nombre = document.getElementById('f-nom').value.trim();
+  if (!nombre) { toast('El nombre es obligatorio', 'er'); return; }
 
-  var fotoUrl='';
-  if(activeTab==='up'){
-    if(pendingBlob){
+  var fotoUrl = '';
+  if (activeTab === 'up') {
+    if (pendingBlob) {
       setSaving(true);
       fotoUrl = await uploadToStorage();
-      if(!fotoUrl){ setSaving(false); return; }
-    } else if(id){
-      fotoUrl=document.getElementById('edit-url').value; // mantener la actual
-    } else { toast('Selecciona una foto','er'); return; }
+      if (!fotoUrl) { setSaving(false); return; }
+    } else if (id) {
+      fotoUrl = document.getElementById('edit-url').value;
+    } else { toast('Selecciona un archivo', 'er'); return; }
   } else {
-    fotoUrl=document.getElementById('f-url').value.trim();
-    if(!fotoUrl){ toast('Introduce una URL','er'); return; }
+    fotoUrl = document.getElementById('f-url').value.trim();
+    if (!fotoUrl) { toast('Introduce una URL', 'er'); return; }
   }
 
   setSaving(true);
-  var maxOrden = platos.reduce(function(m,p){ return Math.max(m,p.orden||0); },0);
+  var maxOrden = platos.reduce(function(m,p){ return Math.max(m, p.orden||0); }, 0);
   var data = {
-    nombre:nombre,
-    precio:document.getElementById('f-precio').value.trim(),
-    descripcion:document.getElementById('f-desc').value.trim(),
-    url:fotoUrl,
-    tipo:activeTab==='up'?'storage':'url',
-    activo:true
+    nombre:      nombre,
+    precio:      document.getElementById('f-precio').value.trim(),
+    descripcion: document.getElementById('f-desc').value.trim(),
+    url:         fotoUrl,
+    tipo:        activeTab === 'up' ? 'storage' : 'url',
+    activo:      true
   };
 
-  var r;
-  if(id){
-    r = await supabase_client.from('platos').update(data).eq('id',id);
-  } else {
-    data.orden = maxOrden+1;
-    r = await supabase_client.from('platos').insert([data]);
-  }
+  var r = id
+    ? await sb.from('platos').update(data).eq('id', id)
+    : await sb.from('platos').insert([Object.assign(data, {orden: maxOrden+1})]);
 
   setSaving(false);
-  if(r.error){ toast('Error: '+r.error.message,'er'); return; }
-  toast((id?'Plato actualizado':'Plato añadido')+' — la TV se actualiza al instante ✓','ok');
+  if (r.error) { toast('Error: ' + r.error.message, 'er'); return; }
+  toast((id ? 'Plato actualizado' : 'Plato añadido') + ' — TV actualizada al instante ✓', 'ok');
   clearForm();
   loadPlatos();
 }
 
-function setSaving(on){
-  document.getElementById('save-btn').disabled=on;
-  document.getElementById('saving-txt').style.display=on?'inline':'none';
+function setSaving(on) {
+  document.getElementById('save-btn').disabled = on;
+  document.getElementById('saving-txt').style.display = on ? 'inline' : 'none';
 }
 
-/* ── EDIT / TOGGLE / DELETE ── */
-function editPlato(id){
-  var p=platos.find(function(x){return x.id===id;});
-  if(!p) return;
-  document.getElementById('edit-id').value=p.id;
-  document.getElementById('edit-url').value=p.url||'';
-  document.getElementById('f-nom').value=p.nombre;
-  document.getElementById('f-precio').value=p.precio||'';
-  document.getElementById('f-desc').value=p.descripcion||'';
-  document.getElementById('form-title').textContent='Editando: '+p.nombre;
-  if(p.tipo==='storage'||p.tipo==='local'){
+/* ══ EDIT / TOGGLE / DELETE / ORDEN ══ */
+function editPlato(id) {
+  var p = platos.find(function(x){ return x.id === id; });
+  if (!p) return;
+  document.getElementById('edit-id').value   = p.id;
+  document.getElementById('edit-url').value  = p.url || '';
+  document.getElementById('f-nom').value     = p.nombre;
+  document.getElementById('f-precio').value  = p.precio || '';
+  document.getElementById('f-desc').value    = p.descripcion || '';
+  document.getElementById('form-title').textContent = 'Editando: ' + p.nombre;
+  if (p.tipo === 'storage') {
     switchTab('up');
-    // mostrar foto actual
-    document.getElementById('fprev-img').src=p.url;
-    document.getElementById('fprev-name').textContent='Foto actual';
-    document.getElementById('fprev-sz').textContent='(en Storage)';
-    document.getElementById('fprev').style.display='block';
-    document.getElementById('cmp').style.display='none';
+    var tipo = detectTipoUrl(p.url);
+    pendingBlob = null;
+    document.getElementById('fprev-img').src = tipo !== 'video' ? p.url : '';
+    document.getElementById('fprev-img').style.display = tipo !== 'video' ? 'block' : 'none';
+    var existVid = document.getElementById('fprev-vid');
+    if (existVid) existVid.remove();
+    if (tipo === 'video') {
+      var vid = document.createElement('video');
+      vid.id = 'fprev-vid'; vid.src = p.url; vid.muted = true; vid.autoplay = true; vid.loop = true; vid.playsInline = true;
+      vid.style.cssText = 'width:100%;max-height:140px;object-fit:cover;display:block';
+      document.getElementById('fprev').insertBefore(vid, document.getElementById('fprev').firstChild);
+    }
+    document.getElementById('fprev-name').textContent = 'Archivo actual en Storage';
+    document.getElementById('fprev-sz').textContent = '';
+    document.getElementById('fprev').style.display = 'block';
   } else {
     switchTab('url');
-    document.getElementById('f-url').value=p.url||'';
+    document.getElementById('f-url').value = p.url || '';
     previewUrl();
   }
   document.querySelector('.form-card').scrollIntoView({behavior:'smooth'});
 }
 
-async function togglePlato(id){
-  var p=platos.find(function(x){return x.id===id;});
-  if(!p) return;
-  var r=await supabase_client.from('platos').update({activo:!p.activo}).eq('id',id);
-  if(r.error){ toast('Error: '+r.error.message,'er'); return; }
-  toast((p.activo?'Plato ocultado':'Plato activado')+' en TV','ok');
+async function togglePlato(id) {
+  var p = platos.find(function(x){ return x.id === id; });
+  if (!p) return;
+  var r = await sb.from('platos').update({activo: !p.activo}).eq('id', id);
+  if (r.error) { toast('Error: ' + r.error.message, 'er'); return; }
+  toast(p.activo ? 'Plato ocultado' : 'Plato activado', 'ok');
   loadPlatos();
 }
 
-async function deletePlato(id){
-  var p=platos.find(function(x){return x.id===id;});
-  if(!confirm('¿Eliminar "'+p.nombre+'"?')) return;
-  // Borrar de Storage si aplica
-  if(p.tipo==='storage'&&p.url){
-    var path=p.url.split('/menu-fotos/')[1];
-    if(path) await supabase_upload.storage.from('menu-fotos').remove([path]);
+async function deletePlato(id) {
+  var p = platos.find(function(x){ return x.id === id; });
+  if (!confirm('¿Eliminar "' + p.nombre + '"?')) return;
+  if (p.tipo === 'storage' && p.url) {
+    var path = p.url.split('/menu-fotos/')[1];
+    if (path) await sbUp.storage.from('menu-fotos').remove([path]);
   }
-  var r=await supabase_client.from('platos').delete().eq('id',id);
-  if(r.error){ toast('Error: '+r.error.message,'er'); return; }
-  toast('Plato eliminado','ok');
+  var r = await sb.from('platos').delete().eq('id', id);
+  if (r.error) { toast('Error: ' + r.error.message, 'er'); return; }
+  toast('Plato eliminado', 'ok');
   loadPlatos();
 }
 
-async function moveOrden(id, dir){
-  var i=platos.findIndex(function(x){return x.id===id;});
-  var j=i+dir;
-  if(j<0||j>=platos.length) return;
-  var a=platos[i], b=platos[j];
-  var oa=a.orden||i, ob=b.orden||j;
+async function moveOrden(id, dir) {
+  var i = platos.findIndex(function(x){ return x.id === id; });
+  var j = i + dir;
+  if (j < 0 || j >= platos.length) return;
+  var a = platos[i], b = platos[j];
   await Promise.all([
-    supabase_client.from('platos').update({orden:ob}).eq('id',a.id),
-    supabase_client.from('platos').update({orden:oa}).eq('id',b.id)
+    sb.from('platos').update({orden: b.orden||j}).eq('id', a.id),
+    sb.from('platos').update({orden: a.orden||i}).eq('id', b.id)
   ]);
   loadPlatos();
 }
 
-function clearForm(){
+function clearForm() {
   ['edit-id','edit-url','f-nom','f-precio','f-desc','f-url'].forEach(function(k){ document.getElementById(k).value=''; });
-  document.getElementById('form-title').textContent='Añadir plato';
+  document.getElementById('form-title').textContent = 'Añadir plato';
   removeFoto();
-  document.getElementById('uprev').style.display='none';
+  document.getElementById('uprev').style.display = 'none';
+  document.getElementById('uprev-vid').style.display = 'none';
+  document.getElementById('uprev-vid').src = '';
   switchTab('up');
 }
 
-/* ── RENDER GRID ── */
-function detectTipoUrl(url){
-  if(!url) return 'imagen';
-  var u = url.toLowerCase().split('?')[0];
-  if(u.endsWith('.mp4')||u.endsWith('.webm')||u.endsWith('.ogg')||u.includes('.mp4')||u.includes('.webm')) return 'video';
-  if(u.endsWith('.gif')||u.includes('.gif')) return 'gif';
-  return 'imagen';
+/* ══ RENDER GRID ══ */
+function mediaBadge(url) {
+  var t = detectTipoUrl(url);
+  if (t === 'video') return '<div class="media-badge tipo-video">▶ VIDEO</div>';
+  if (t === 'gif')   return '<div class="media-badge tipo-gif">⟳ GIF</div>';
+  return '<div class="media-badge tipo-foto">📷 FOTO</div>';
 }
 
-function renderThumb(p){
-  if(!p.url) return '';
-  var tipo = detectTipoUrl(p.url);
-  if(tipo === 'video'){
-    return '<video class="thumb-vid" src="'+p.url+'" muted loop autoplay playsinline onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"></video>';
+function mediaThumb(p) {
+  if (!p.url) return '';
+  var t = detectTipoUrl(p.url);
+  var errHandler = 'this.style.display=&quot;none&quot;;this.nextElementSibling.style.display=&quot;flex&quot;';
+  if (t === 'video') {
+    return '<video class="thumb" src="' + p.url + '" muted loop autoplay playsinline></video>';
   }
-  return '<img src="'+p.url+'" alt="'+p.nombre+'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">';
+  return '<img class="thumb" src="' + p.url + '" alt="' + p.nombre + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">';
 }
 
-function renderMediaBadge(p){
-  if(!p.url) return '';
-  var tipo = detectTipoUrl(p.url);
-  if(tipo === 'video') return '<div class="media-badge video">▶ VIDEO</div>';
-  if(tipo === 'gif')   return '<div class="media-badge gif">⟳ GIF</div>';
-  return '<div class="media-badge foto">📷 FOTO</div>';
-}
-
-function renderGrid(){
-  var grid=document.getElementById('grid');
-  document.getElementById('count').textContent=platos.length+' plato'+(platos.length!==1?'s':'');
-  if(!platos.length){
-    grid.innerHTML='<div class="empty"><div style="font-size:32px;margin-bottom:8px">🍽</div><p>Aún no hay platos. Añade el primero arriba.</p></div>';
+function renderGrid() {
+  var grid = document.getElementById('grid');
+  document.getElementById('count').textContent = platos.length + ' plato' + (platos.length !== 1 ? 's' : '');
+  if (!platos.length) {
+    grid.innerHTML = '<div class="empty"><div style="font-size:32px;margin-bottom:8px">🍽</div><p>Añade el primer plato usando el formulario de arriba.</p></div>';
     return;
   }
-  grid.innerHTML=platos.map(function(p,i){
-    var badge=p.tipo==='storage'?'<span class="ibadge cloud">☁ Storage</span>':'<span class="ibadge loc">🔗 URL</span>';
+  grid.innerHTML = platos.map(function(p, i) {
     return '<div class="card">'
-      +(p.url?'<img src="'+p.url+'" alt="'+p.nombre+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">':'')
-      +'<div class="nopic" style="'+(p.url?'display:none':'')+'">Sin imagen</div>'
-      +badge
-      +(!p.activo?'<div class="offbadge">Oculto</div>':'')
-      +'<div class="ord-btns">'
-        +(i>0?'<button class="ob" onclick="moveOrden(\''+p.id+'\',-1)" title="Subir">▲</button>':'')
-        +(i<platos.length-1?'<button class="ob" onclick="moveOrden(\''+p.id+'\',1)" title="Bajar">▼</button>':'')
-      +'</div>'
-      +'<div class="ci">'
-        +'<div class="nm" title="'+p.nombre+'">'+p.nombre+'</div>'
-        +(p.precio?'<div class="pr">'+((configData.moneda||'€'))+p.precio+'</div>':'')
-        +(p.descripcion?'<div class="ds">'+p.descripcion+'</div>':'')
-      +'</div>'
-      +'<div class="acts">'
-        +'<button class="btn btn-ghost btn-sm" onclick="editPlato(\''+p.id+'\')">✏ Editar</button>'
-        +'<button class="btn btn-ghost btn-sm" onclick="togglePlato(\''+p.id+'\')">'+(p.activo?'👁 Ocultar':'👁 Mostrar')+'</button>'
-        +'<button class="btn btn-err btn-sm" onclick="deletePlato(\''+p.id+'\')">✕</button>'
-      +'</div>'
-    +'</div>';
+      + mediaThumb(p)
+      + '<div class="nopic" style="' + (p.url ? 'display:none' : '') + '">Sin media</div>'
+      + '<div class="ibadge ' + (p.tipo === 'storage' ? 'cloud' : 'loc') + '">' + (p.tipo === 'storage' ? '☁ Storage' : '🔗 URL') + '</div>'
+      + (!p.activo ? '<div class="offbadge">Oculto</div>' : '')
+      + mediaBadge(p.url)
+      + '<div class="ord-btns">'
+        + (i > 0 ? '<button class="ob" onclick="moveOrden(\'' + p.id + '\',-1)">▲</button>' : '')
+        + (i < platos.length-1 ? '<button class="ob" onclick="moveOrden(\'' + p.id + '\',1)">▼</button>' : '')
+      + '</div>'
+      + '<div class="ci">'
+        + '<div class="nm" title="' + p.nombre + '">' + p.nombre + '</div>'
+        + (p.precio ? '<div class="pr">' + (configData.moneda||'€') + p.precio + '</div>' : '')
+        + (p.descripcion ? '<div class="ds">' + p.descripcion + '</div>' : '')
+      + '</div>'
+      + '<div class="acts">'
+        + '<button class="btn btn-ghost btn-sm" onclick="editPlato(\'' + p.id + '\')">✏ Editar</button>'
+        + '<button class="btn btn-ghost btn-sm" onclick="togglePlato(\'' + p.id + '\')">' + (p.activo ? '👁 Ocultar' : '👁 Mostrar') + '</button>'
+        + '<button class="btn btn-err btn-sm" onclick="deletePlato(\'' + p.id + '\')">✕</button>'
+      + '</div>'
+    + '</div>';
   }).join('');
 }
 
-/* ── TOAST ── */
+/* ══ TOAST ══ */
 var toastTimer;
-function toast(msg, type){
-  var el=document.getElementById('toast');
-  el.textContent=msg; el.className='show '+(type||'');
+function toast(msg, type) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show ' + (type || '');
   clearTimeout(toastTimer);
-  toastTimer=setTimeout(function(){ el.className=''; },3500);
+  toastTimer = setTimeout(function(){ el.className = ''; }, 3500);
 }
 
-/* ── INIT ── */
-if(SUPA_URL&&SUPA_KEY){
-  document.getElementById('setup').style.display='none';
+/* ══ INIT ══ */
+if (SUPA_URL && SUPA_KEY) {
+  document.getElementById('setup').style.display = 'none';
   initSupabase();
 }
 </script>
